@@ -1,5 +1,4 @@
 require "hyperloop/console/version"
-require 'hyper-store'
 require 'hyper-operation'
 require 'hyperloop/console/hyper_console'
 require 'hyperloop/console/evaluate'
