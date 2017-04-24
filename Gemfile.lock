@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    hyper-console (0.1.0)
+    hyper-console (0.1.1)
       hyper-operation
+      hyper-store (>= 0.2.3)
 
 GEM
   remote: https://rubygems.org/
@@ -94,7 +95,7 @@ GEM
       hyperloop-config (>= 0.9.7)
       opal (>= 0.8.0)
       opal-activesupport (>= 0.2.0)
-    hyper-store (0.2.2)
+    hyper-store (0.2.3)
       hyperloop-config (>= 0.9.2)
     hyperloop-config (0.9.8)
       opal
