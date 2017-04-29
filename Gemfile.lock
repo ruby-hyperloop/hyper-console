@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hyper-console (0.1.1)
+    hyper-console (0.1.2)
       hyper-operation
       hyper-store (>= 0.2.3)
 
