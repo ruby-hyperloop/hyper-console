@@ -30,7 +30,12 @@ module Hyperloop
           @code_to_send = @code_to_send[0..-2]
           mutate.history << {eval: @code_to_send}
           mutate.console_state :sending
-          Evaluate.run target_id: application_window_id, sender_id: console_id, context: context, string: compiled_code
+          # if using actioncable with opal_hot_reloader the connection will close
+          # so this hack will reopen the connection before sending the message.
+          HTTP.get("#{`window.HyperloopEnginePath`}/server_up") do
+            `#{Hyperloop.action_cable_consumer}.connection.open()` if Hyperloop.action_cable_consumer
+            Evaluate.run target_id: application_window_id, sender_id: console_id, context: context, string: compiled_code
+          end
         end
       end
 
