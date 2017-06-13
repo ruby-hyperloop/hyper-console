@@ -33,7 +33,7 @@ module Hyperloop
           # if using actioncable with opal_hot_reloader the connection will close
           # so this hack will reopen the connection before sending the message.
           HTTP.get("#{`window.HyperloopEnginePath`}/server_up") do
-            `#{Hyperloop.action_cable_consumer}.connection.open()` if Hyperloop.action_cable_consumer
+            `#{Hyperloop.action_cable_consumer}.connection.open()` if Hyperloop.action_cable_consumer && `#{Hyperloop.action_cable_consumer}.connection.disconnected`
             Evaluate.run target_id: application_window_id, sender_id: console_id, context: context, string: compiled_code
           end
         end
