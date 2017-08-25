@@ -45,20 +45,15 @@ Everything has a place in our architecture. Components deliver interactive user 
 ```ruby
 #Gemfile
 
-gem 'hyperloop'
+gem 'hyper-console'
 ```
 
 2. At the command prompt, update your bundle :
 
         $ bundle update
 
-3. Run the hyperloop install generator:
-
-        $ rails g hyperloop:install
-
-4. Follow the guidelines to start developing your application. You may find
-   the following resources handy:
-    * [Getting Started with Hyperloop](http://ruby-hyperloop.io/start)
+3. Follow the Hyper-console documentation<: 
+    * [Hyper-console documentation](http://ruby-hyperloop.io/tools/hyperconsole/)
     * [Hyperloop Guides](http://ruby-hyperloop.io/docs/architecture)
     * [Hyperloop Tutorial](http://ruby-hyperloop.io/tutorials)
 
