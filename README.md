@@ -52,7 +52,7 @@ gem 'hyper-console'
 
         $ bundle update
 
-3. Follow the Hyper-console documentation<: 
+3. Follow the Hyper-console documentation: 
     * [Hyper-console documentation](http://ruby-hyperloop.io/tools/hyperconsole/)
     * [Hyperloop Guides](http://ruby-hyperloop.io/docs/architecture)
     * [Hyperloop Tutorial](http://ruby-hyperloop.io/tutorials)
