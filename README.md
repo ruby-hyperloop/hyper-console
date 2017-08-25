@@ -1,135 +1,77 @@
-# Hyper-Console
+<div class="githubhyperloopheader">
 
-IRB style console for [Hyperloop](http://ruby-hyperloop.io) applications.
+<p align="center">
 
-![Screen](screen_shot.png)
+<a href="http://ruby-hyperloop.io/" alt="Hyperloop" title="Hyperloop">
+<img width="350px" src="http://ruby-hyperloop.io/images/hyperloop-github-logo.png">
+</a>
 
-### Installation
+</p>
 
-Add
+<h2 align="center">The Complete Isomorphic Ruby Framework</h2>
 
+<br>
+
+<a href="http://ruby-hyperloop.io/" alt="Hyperloop" title="Hyperloop">
+<img src="http://ruby-hyperloop.io/images/githubhyperloopbadge.png">
+</a>
+
+<a href="https://gitter.im/ruby-hyperloop/chat" alt="Gitter chat" title="Gitter chat">
+<img src="http://ruby-hyperloop.io/images/githubgitterbadge.png">
+</a>
+
+[![Gem Version](https://badge.fury.io/rb/hyper-console.svg)](https://badge.fury.io/rb/hyper-console)
+
+<p align="center">
+<img src="http://ruby-hyperloop.io/images/HyperConsole.png" width="100" alt="Hyper-console">
+</p>
+
+</div>
+
+## Hyper-console GEM is part of Hyperloop GEMS family
+
+Build interactive Web applications quickly. Hyperloop encourages rapid development with clean, pragmatic design. With developer productivity as our highest goal, Hyperloop takes care of much of the hassle of Web development, so you can focus on innovation and delivering end-user value.
+
+One language. One model. One set of tests. The same business logic and domain models running on the clients and the server. Hyperloop is fully integrated with Rails and also gives you unfettered access to the complete universe of JavaScript libraries (including React) from within your Ruby code. Hyperloop lets you build beautiful interactive user interfaces in Ruby.
+
+Everything has a place in our architecture. Components deliver interactive user experiences, Operations encapsulate business logic, Models magically synchronize data between clients and servers, Policies govern authorization and Stores hold local state. 
+
+**hyper-console** brings an IRB style console for [Hyperloop](http://ruby-hyperloop.io) applications.
+
+## Getting Started
+
+1. Update your Gemfile:
+        
 ```ruby
-gem 'hyper-console'
+#Gemfile
+
+gem 'hyperloop'
 ```
 
-To the development and test sections of your Gemfile.
+2. At the command prompt, update your bundle :
 
-Do a `bundle install`, and `rm -rf tmp/cache`, then restart the server, hit one of your web pages, and the console will open.
+        $ bundle update
 
-*Note currently you must have enabled the `Hyperloop::Application` channel in your policies.  Hopefully we can remove this in the future*
+3. Run the hyperloop install generator:
 
-*Note for Rails 4.x you will also need to add these lines to `config/initializer/assets.rb`:*
+        $ rails g hyperloop:install
 
-```ruby
-Rails.application.config.assets.precompile += %w( hyper-console-client.css )
-Rails.application.config.assets.precompile += %w( hyper-console-client.min.js )
-```
+4. Follow the guidelines to start developing your application. You may find
+   the following resources handy:
+    * [Getting Started with Hyperloop](http://ruby-hyperloop.io/start)
+    * [Hyperloop Guides](http://ruby-hyperloop.io/docs/architecture)
+    * [Hyperloop Tutorial](http://ruby-hyperloop.io/tutorials)
 
-### Details
+## Community
 
-The `hyper-console` gem adds the `console` method to `Kernel`.  If you call `console` from anywhere in your client code, it will open a new *popup* window, that is running an IRB style read-eval loop.  The console window will compile what ever ruby code you type, and if it compiles, will send it to your main window for execution.  The result (or error message) plus any console output will be displayed in the console window.
+#### Getting Help
+Please **do not post** usage questions to GitHub Issues. For these types of questions use our [Gitter chatroom](https://gitter.im/ruby-hyperloop/chat) or [StackOverflow](http://stackoverflow.com/questions/tagged/hyperloop).
 
-+ You may use the up/down arrow keys to move to previous expressions, edit them, and resend.  
-+ If you are editing a block of code you can send the block immediately without moving to the end of the expression by using command (or ctrl) enter.
-+ The console history is stored in the popups html local store, so it will be retained across window reloads.
-+ The expression can be arbitrarily complex.  You can investigate model scopes, and attributes, run Operations, and get the current value of component states.
-+ You can even create classes, or open existing classes and modify their behavior.
-
-### The `instance` method
-
-The console gem adds an `instance` method to all classes.  This will return an array like object of all the current instances of that class, *except instances bound to closures (sorry!)*.  
-
-For example if you have a component named `Components::TodoItem` then
-
-```ruby
-Components::TodoItem.instance[0] # first instance
-Components::TodoItem.instance    # array of all the instances
-Components::TodoItem.instance[0].dom_node  # returns the mount point
-```
-
-This is all very handy for investigating the state of Components and Stores.  For example assuming your top level component is named `App` and is using hyper-router, you can do things like this:
-
-```ruby
-App.instance[0].location.pathname # current path
-App.instance[0].history.push '/topics' # change path to `/topics`
-```
-
-Because its common for there to be a single instance of some classes, the expression `instance[0]` can be shortened to just `instance` when there is only one instance of a class.  For example in the above example you could just say `App.instance.location.pathname`.
-
-### Console Context
-
-Each console window (you can have several) has an execution context, which is simply an expression that is used to determine the value of `self` that console executes in.  
-
-For example let's say you have a `Todo` model.  You could in the console window evaluate
-
-```ruby
-console context: 'Todo.first'
-```
-
-And a new console window will be opened that is "bound" to `Todo.first` so that in this window you can simply evaluate
-
-```ruby
-title
-```
-Instead of `Todo.first.title`
-
-Combining this with the `instance` method gives you a way to create a console window on a specific object in your application:
-
-```ruby
-console context: 'App.instance'
-```
-
-Will create a console window whose `self` is your top level application component.
-
-*Note: if no context is provided, the context will be main opal context.*
-
-### Console Titles
-
-You can also give console windows a title:
-
-```ruby
-console text: 'App.instance', title: 'App'
-```
-
-### Loading / Reloading from Javascript
-
-The `hyperconsole` method is added to the javascript window object, so in your application's javascript console you can say `hyperconsole()` to load (or reload) the main hyperconsole window.  When reloading any prior command history will be retained, so this makes a nice escape hatch if things ever become totally confused.
-
-### Loading at Application Boot
-
-By default a console will be created when your page loads.  You can turn this off by setting
-```ruby
-config.console_auto_start = false
-```
-in your hyperloop rails initializer.
-
-You can still start the console using `hyperconsole()` as described above.
-
-### How it works
-
-The console and main application window communicate via two Hyperloop Operations: `Evaluate`, and `Response`.  
-
-As you type, the console runs the Opal compiler in the console window, and when you have a valid ruby expression, the resulting compiled code is sent to the main window using `Evaluate`.  The main window receives the Evaluate dispatch, does a javascript eval and returns the result.  
-
-## Development
-
-After checking out the repo, run bundle install.
-
-The console assets are packaged into a single JS file, and a single style sheet.  Running `rake` will build the packages, and put them in the appropriate directories.
-
-## TODO (help wanted)
-
-+ configurable themes, especially smaller font size
-+ full keyboard controls (i.e things like ctrl-a moves to beginning of line)
-+ remove dependency on `Hyperloop::Application` channel
-+ Peer to peer communication once initial connection is made
-+ Chrome extension so that console can be attached physically to main window
-+ add some kind of test suite, and ability to test without building the asset package
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hyper-console. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+#### Submitting Bugs and Enhancements
+[GitHub Issues](https://github.com/ruby-hyperloop/hyperloop/issues) is for suggesting enhancements and reporting bugs. Before submiting a bug make sure you do the following:
+* Check out our [contributing guide](https://github.com/ruby-hyperloop/hyperloop/blob/master/CONTRIBUTING.md) for info on our release cycle.
 
 ## License
 
-Hyperloop gems are released under the [MIT License](http://www.opensource.org/licenses/MIT).
+Hyperloop is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+
