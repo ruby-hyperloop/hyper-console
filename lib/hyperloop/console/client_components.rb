@@ -87,7 +87,7 @@ module Hyperloop
           indentUnit: 2,
           theme: 'github',
           readOnly: #{!!@read_only}
-        });`
+        })`
       end
 
       render(DIV)

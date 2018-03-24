@@ -21,7 +21,7 @@ task :minify do
   puts "About to build hyper-console-client.min.js"
   js_file = "lib/hyper-console-client.js"
   js_min_file = "lib/hyper-console-client.min.js"
-  File.open(js_min_file, "w").write(Uglifier.new.compile(File.read(js_file)))
+  File.open(js_min_file, "w").write(Uglifier.new(:harmony => true).compile(File.read(js_file)))
   puts "done"
 end
 task default: [:build, :minify]

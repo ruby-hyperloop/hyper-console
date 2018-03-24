@@ -18,18 +18,19 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'hyper-operation'
-  spec.add_dependency 'hyper-store', ">= 0.2.3"
+  spec.add_dependency 'hyper-operation', Hyperloop::Console::VERSION
+  spec.add_dependency 'hyper-store', Hyperloop::Console::VERSION
+
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency 'opal'
+  spec.add_development_dependency 'opal', '>= 0.11.0', '< 0.12.0'
   spec.add_development_dependency 'opal-browser'
   spec.add_development_dependency 'rails'
-  spec.add_development_dependency 'opal-rails', '>= 0.8.1'
+  spec.add_development_dependency 'opal-rails', '~> 0.9.4'
   spec.add_development_dependency 'hyper-component'
   spec.add_development_dependency 'hyper-operation'
   spec.add_development_dependency 'hyper-store'
   spec.add_development_dependency 'hyperloop-config'
   spec.add_development_dependency 'opal-jquery'
-  spec.add_development_dependency 'uglifier'
+  spec.add_development_dependency 'uglifier', '4.1.6'
 end
