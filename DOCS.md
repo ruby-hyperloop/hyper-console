@@ -18,13 +18,6 @@ Do a `bundle install`, and `rm -rf tmp/cache`, then restart the server, hit one 
 
 *Note currently you must have enabled the `Hyperloop::Application` channel in your policies.  Hopefully we can remove this in the future*
 
-*Note for Rails 4.x you will also need to add these lines to `config/initializer/assets.rb`:*
-
-```ruby
-Rails.application.config.assets.precompile += %w( hyper-console-client.css )
-Rails.application.config.assets.precompile += %w( hyper-console-client.min.js )
-```
-
 ### Details
 
 The `hyper-console` gem adds the `console` method to `Kernel`.  If you call `console` from anywhere in your client code, it will open a new *popup* window, that is running an IRB style read-eval loop.  The console window will compile what ever ruby code you type, and if it compiles, will send it to your main window for execution.  The result (or error message) plus any console output will be displayed in the console window.
