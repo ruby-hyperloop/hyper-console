@@ -27,10 +27,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'opal-browser'
   spec.add_development_dependency 'rails'
   spec.add_development_dependency 'opal-rails', '~> 0.9.4'
-  spec.add_development_dependency 'hyper-component', Hyperloop::Console::Version
-  spec.add_development_dependency 'hyper-operation', Hyperloop::Console::Version
-  spec.add_development_dependency 'hyper-store', Hyperloop::Console::Version
-  spec.add_development_dependency 'hyperloop-config', Hyperloop::Console::Version
+  spec.add_development_dependency 'hyper-component', Hyperloop::Console::VERSION
+  spec.add_development_dependency 'hyper-operation', Hyperloop::Console::VERSION
+  spec.add_development_dependency 'hyper-store', Hyperloop::Console::VERSION
+  spec.add_development_dependency 'hyperloop-config', Hyperloop::Console::VERSION
   spec.add_development_dependency 'opal-jquery'
   spec.add_development_dependency 'uglifier', '4.1.6'
 end
