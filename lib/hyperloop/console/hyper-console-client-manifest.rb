@@ -1,7 +1,6 @@
 require 'opal'
 require 'browser/interval'
 require 'browser/delay'
-require 'opal-jquery'
 #require 'reactrb/auto-import'
 module Hyperloop
   class Component

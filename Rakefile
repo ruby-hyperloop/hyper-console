@@ -1,10 +1,8 @@
 require 'hyperloop-config'
 require 'rubygems'
-require 'opal-rails'
 require 'hyper-operation'
 require 'hyper-store'
 require 'opal-browser'
-require 'opal-jquery'
 require 'uglifier'
 require 'react-rails'
 
